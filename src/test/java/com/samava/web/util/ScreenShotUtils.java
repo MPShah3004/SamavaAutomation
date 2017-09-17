@@ -1,4 +1,4 @@
-package com.lieferando.web.util;
+package com.samava.web.util;
 
 import cucumber.api.Scenario;
 import org.apache.commons.io.FileUtils;
@@ -23,11 +23,11 @@ public class ScreenShotUtils {
         reset();
     }
 
-    public static String saveScreenShotAs(String fileName, String comment) {
+    static String saveScreenShotAs(String fileName, String comment) {
         return saveScreenShotAndPageSourceAs(fileName, comment, null);
     }
 
-    public static String saveScreenShotAndPageSourceAs(String fileName, String comment, String pageSource) {
+    private static String saveScreenShotAndPageSourceAs(String fileName, String comment, String pageSource) {
         WebDriver driver = contextManager.driver();
         String savedFileName = "";
         if (null != driver) {
@@ -58,7 +58,7 @@ public class ScreenShotUtils {
         return String.format("%03d", ++screenShotCounter);
     }
 
-    static void reset() {
+    private static void reset() {
         LOGGER.debug("Setting ScreenShot Counter to 0");
         screenShotCounter = 0;
     }

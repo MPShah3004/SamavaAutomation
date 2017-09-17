@@ -1,8 +1,8 @@
-# Lieferando Automation Assessment
+# Samava Automation Assessment
 
 **Scenario**
-1. Search with address string and address code, should show list of restaurant options
-2. Search with invalid strings (blank or junk data), should not show any options
+1. Search for various loan options
+2. Login with invalid credentials
  
 Search functionality based on address or post code, the whole automation drafted in cucumber-jvm using Page Object Model.
 
@@ -17,13 +17,14 @@ Search functionality based on address or post code, the whole automation drafted
 1. Implemented to gradle, nice support for parallel execution for cucumber-jvm
     https://github.com/camiloribeiro/cucumber-gradle-parallel
 2. To be leverage to CI(using JenkinsPipeline)
+3. Can be extended it to Mobile Web using Appium
 
-**Pre-requisite**
+**Prerequisite**
 1. Download chrome driver
     https://chromedriver.storage.googleapis.com/index.html?path=2.31/
 2. Download gecko driver
     https://github.com/mozilla/geckodriver/releases
-3. Provide paths to Lieferando.properties
+3. Provide paths to AutomationConfig.properties
     `firefox.driver.path=<path/to/geckodriver>
      chrome.driver.path=<path/to/chromedriver>
     `

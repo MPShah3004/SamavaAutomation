@@ -1,6 +1,6 @@
-package com.lieferando.web.pages;
+package com.samava.web.pages;
 
-import com.lieferando.web.util.ContextManager;
+import com.samava.web.util.ContextManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,7 +15,7 @@ public class AbstractPage {
 
     public Logger LOGGER = LogManager.getLogger(this.getClass());
 
-    WebDriver driver;
+    private WebDriver driver;
 
     AbstractPage() {
         ContextManager contextManager = ContextManager.getInstance();
@@ -27,7 +27,7 @@ public class AbstractPage {
         clickOnElement(webElement, 30);
     }
 
-    void clickOnElement(WebElement webElement, int timeout) {
+    private void clickOnElement(WebElement webElement, int timeout) {
         LOGGER.debug("clicking on " + webElement.toString());
         if (waitForElementToBeClickable(webElement, timeout)) {
             webElement.click();
@@ -38,10 +38,9 @@ public class AbstractPage {
         enterTextTo(webElement, textValue, 30);
     }
 
-    void enterTextTo(WebElement webElement, String textValue, int timeout) {
+    private void enterTextTo(WebElement webElement, String textValue, int timeout) {
         LOGGER.debug("Enter " + textValue + " in  " + webElement.toString());
         if (waitForElementToBeClickable(webElement, timeout)) {
-            webElement.clear();
             webElement.sendKeys(textValue);
         }
     }
@@ -61,7 +60,7 @@ public class AbstractPage {
         return waitForElementToBeVisible(webElement, 10);
     }
 
-    boolean waitForElementToBeClickable(WebElement webElement, int timeout) {
+    private boolean waitForElementToBeClickable(WebElement webElement, int timeout) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
@@ -78,5 +77,10 @@ public class AbstractPage {
 
     public String getPageTitle() {
         return driver.getTitle();
+    }
+
+    void selectValueFromList(WebElement listName, String value) {
+        clickOnElement(listName);
+        enterTextTo(listName, value);
     }
 }

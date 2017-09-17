@@ -1,4 +1,4 @@
-package com.lieferando.web.util;
+package com.samava.web.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CustomAsserts {
     public static Logger LOGGER = LogManager.getLogger(CustomAsserts.class);
-    private static ArrayList<String> verificationFailures = new ArrayList<String>();
+    private static ArrayList<String> verificationFailures = new ArrayList<>();
 
     public static <T> void assertThat(String reason, T actual, Matcher<? super T> matcher) {
         try {

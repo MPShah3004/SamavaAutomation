@@ -1,9 +1,9 @@
-package com.lieferando.web.stepdefs;
+package com.samava.web.stepdefs;
 
 
-import com.lieferando.web.util.ContextManager;
-import com.lieferando.web.util.KEYS;
-import com.lieferando.web.util.ScreenShotUtils;
+import com.samava.web.util.ContextManager;
+import com.samava.web.util.KEYS;
+import com.samava.web.util.ScreenShotUtils;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

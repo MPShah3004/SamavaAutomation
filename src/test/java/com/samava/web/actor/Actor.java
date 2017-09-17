@@ -1,15 +1,15 @@
-package com.lieferando.web.actor;
+package com.samava.web.actor;
 
-import com.lieferando.web.businessflow.SearchRestaurants;
-import com.lieferando.web.util.ContextManager;
-import com.lieferando.web.util.DriverFactory;
-import com.lieferando.web.util.KEYS;
+import com.samava.web.businessflow.Login;
+import com.samava.web.businessflow.SearchLoan;
+import com.samava.web.util.ContextManager;
+import com.samava.web.util.DriverFactory;
+import com.samava.web.util.KEYS;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Properties;
 
 public class Actor {
@@ -17,8 +17,6 @@ public class Actor {
     public Logger LOGGER = LogManager.getLogger(this.getClass());
 
     private ContextManager contextManager = ContextManager.getInstance();
-
-    private DriverFactory driverFactory;
 
     private String actorName;
 
@@ -32,7 +30,7 @@ public class Actor {
         try {
             LOGGER.debug("Loading automation properties");
             Properties properties = new Properties();
-            properties.load(ClassLoader.getSystemResource("Lieferando.properties").openStream());
+            properties.load(ClassLoader.getSystemResource("AutomationConfig.properties").openStream());
             contextManager.addToContext(KEYS.BROWSER_TYPE, System.getProperty("browser.type"));
             contextManager.addToContext(KEYS.GECKO_DRIVER_PATH, properties.getProperty("firefox.driver.path"));
             contextManager.addToContext(KEYS.CHROME_DRIVER_PATH, properties.getProperty("chrome.driver.path"));
@@ -42,10 +40,6 @@ public class Actor {
         }
     }
 
-
-    public void searchRestaurants(String searchCriteria) {
-        new SearchRestaurants().searchRestaurantsIn(searchCriteria.split(":")[1]);
-    }
 
     public void openURL(String url) {
         try {
@@ -58,26 +52,31 @@ public class Actor {
 
     public void launchBrowser() {
         loadConfigPropertiesToContext();
-        driverFactory = new DriverFactory();
+        DriverFactory driverFactory = new DriverFactory();
         try {
             contextManager.addToContext(KEYS.DRIVER, driverFactory.getDriver());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void shouldGetListOfRestaurants() {
-        new SearchRestaurants().verifyListOfRestaurants();
+    public void searchLoanFor(Integer amount, Integer duration, String purpose) {
+        new SearchLoan().selectLoanFor(amount, duration, purpose);
     }
 
-    public void picksAnyLocalityFromList() {
-        new SearchRestaurants().selectRandomLocalityFromList();
+    public void selectAnyBank() {
+        new SearchLoan().getDifferentBanks();
     }
 
-    public void shouldNotGetAnyOptionsNearBy() {
-        new SearchRestaurants().verifySearchRecommendations();
+    public void shouldGetDetailForSelectedOption() {
+        new SearchLoan().checkPageIsLoaded();
     }
 
+    public void enterInvalidCredentials() {
+        new Login().loginWithInvalidCredentials("AbcUser", "Test123");
+    }
+
+    public void shouldNotAllowed() {
+        new Login().checkErrorMessage();
+    }
 }

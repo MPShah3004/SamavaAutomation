@@ -1,4 +1,4 @@
-package com.lieferando.web.util;
+package com.samava.web.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +50,7 @@ public class DriverFactory {
     }
 
     private void initWebDriver(WebDriver webDriver) {
-        webDriver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         webDriver.manage().window().maximize();
     }
 
